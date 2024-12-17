@@ -54,6 +54,27 @@ Frontend service on port 8400: http://34.123.45.67:8400
 
 ## STEP BY STEP GUIDE
 
+***
+shift the assignments to this
+```yaml
+chamazetu_database:
+    image: postgres:16
+    container_name: chamazetu_database
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    volumes:
+      - chamazetu_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - chamazetu_network
+```
+
 ```yaml
 services:
   message_broker:
